@@ -25,8 +25,8 @@ contract MTFonteNova2019 {
             uint duracaoContrato;
             PrazoPagamento = now + duracaoContrato;
         
-        address payable _contaMicheltelo public {
-            contaMichelTelo = _contaMicheltelo;
+        address payable _contaMichelTelo public {
+            contaMichelTelo = _contaMichelTelo;
             
         }    
     }
