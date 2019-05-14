@@ -1,0 +1,89 @@
+pragma solidity 0.5.8;
+
+contract frete {
+
+    struct Contratante {
+        string nome;
+        address enderecoContratante;
+        uint valorDoFrete;
+        bool jaFoiReservado;
+    }
+    
+    address payable public contaContratada;
+    uint public prazoParaEmbarque;
+    uint public quantidadeContainers;
+    uint public prazoParaContrato
+
+    address public contaContratante;
+    uint public pagamentoContratante;
+
+    mapping(address => Contratante) public listaContratantes;
+    Contratante[] public contratantes;
+
+    bool public encerrado;
+    bool public lotado;
+    bool public reservado;
+    
+    event zarpou (uint valor);
+                // ^----- tenho dúvida do que colocar aqui. A ideia era gerar
+                // informação de que o navio zarpou. Pensei em vincular com o prazo.
+    
+    //parei aqui a correção            
+
+    modifier somenteGoverno {
+        require(msg.sender == contaGovernamental, "Somente Governo pode realizar essa operacao");
+        _;
+    }
+
+    constructor(
+        uint _prazoParaContrato;
+        uint _prazoParaEmbarque;
+        uint _quantidade Containers;
+        address payable _contaGovernamental
+    ) public {
+        
+        prazoParaContrato = now + _prazoParaContrato;
+        prazoParaEmbarque = now + _prazoParaEmbarque;
+       
+    }
+
+
+    function pagamento(string memory nome, address payable enderecoContratante) public payable {
+        require(now <= prazoParaContrato, "Prazo para Contratacao Encerrado");
+        
+        Contratante = msg.sender;
+        ValorPago = msg.value;
+        
+        
+        for (uint i=0; i<Contratante.length; i++) {
+            Contratante memory leiloeiroPerdedor = ofertantes[i];
+            if (!leiloeiroPerdedor.jaFoiReembolsado) {
+                leiloeiroPerdedor.enderecoCarteira.transfer(leiloeiroPerdedor.oferta);
+                leiloeiroPerdedor.jaFoiReembolsado = true;
+            }
+        }
+        
+
+        Contratante memory ContratantePago = Contratante(nome, enderecoContratante, valorDoFrete, false);
+        
+        
+        Contratante.push(ContratantePago);
+        
+        
+        lista/contratante[ContratantePago.enderecoContratante] = ContratantePago;
+    
+        
+    }
+
+   
+    function InterrompeContratacoes() public somenteFretador {
+       
+        require(now >= jprazoParaContrato, "Prazo Aberto para Contratacao");
+        require(!encerrado, "Prazo para Contratacao Encerrado");
+
+        encerrado = true;
+
+
+        contaContratada.transfer(address(this).balance);
+    }
+}
