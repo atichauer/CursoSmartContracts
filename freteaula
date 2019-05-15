@@ -1,0 +1,77 @@
+pragma solidity 0.5.8;
+
+contract frete {
+
+    struct RelacaoDeContratantes {
+        string nome;
+        address enderecoContratante;
+        //uint numeroDoContainer;
+    }
+        
+    address payable public contaContratada;
+    uint constant public quantidadeContainers = 50;
+    uint public prazoParaContrato;
+    uint public precoPorContainer;
+    
+    address public contaContratante;
+    //uint public pagamentoContratante;
+
+    //mapping(address => RelacaoDeContratantes) public listaContratantes;
+    RelacaoDeContratantes[] public contratantes;
+
+    bool public encerrado;
+    bool public lotado;
+    //bool public reservado;
+    
+    //event zarpou (uint valor);
+                // ^----- tenho dúvida do que colocar aqui. A ideia era gerar
+                // informação de que o navio zarpou. Pensei em vincular com o prazo.
+    
+    modifier somenteContratada {
+        require(msg.sender == contaContratada, "Somente Contratada pode realizar essa operacao");
+        _;
+    }
+
+    constructor(
+        uint _prazoParaContrato, 
+        uint _precoPorContainer, 
+        address payable _contaContratante) public {
+                                                                                                                        //^----- preciso deste item no constructor?
+        prazoParaContrato = now + _prazoParaContrato;
+        precoPorContainer = _precoPorContainer;
+    
+    }
+
+    function pagamento(string memory Nome, address payable enderecoContratante, uint valor) public payable {
+        require (now <= prazoParaContrato, "Prazo para Contratacao Encerrado");
+        require (containersdisponiveis > 0);
+        require (valor == precoPorContainer);
+        
+        enderecoContratante = msg.sender;
+        Valor = msg.value;
+        
+        
+            for (uint i=50; i>Contratante.length; i--) {
+            Contratante memory contratantes = containersdisponiveis[i];
+            
+            }
+    }
+    
+    function registraContratante (string paramnome, adress paramenderecoContratante, uint paramvalorDoFrete, uint paramNumeroDoContainer);
+        Contratante.push(ContratantePago);
+        lista/contratante[ContratantePago.enderecoContratante] = ContratantePago;
+    
+        
+    }
+
+   
+    function InterrompeContratacoes() public somenteContratada {
+       
+        require(now >= prazoParaContrato, "Prazo Aberto para Contratacao");
+        require(!encerrado, "Prazo para Contratacao Encerrado");
+
+        encerrado = true;
+
+        contaContratada.transfer(address(this).balance);
+    }
+}
