@@ -1,0 +1,80 @@
+pragma solidity 0.5.8;
+
+contract frete {
+
+    struct RelacaoDeContratantes {
+        string nome;
+        address enderecoContratante;
+        //uint numeroDoContainer;
+    }    //^--- duvida se insiro esta variavel
+        
+    address payable public contaContratada;
+    uint constant public quantidadeContainers = 50;
+    uint public prazoParaContrato;
+    uint public precoPorContainer;
+    
+    address public contaContratante;
+    //uint public pagamentoContratante;
+    //^--- duvida se insiro esta variavel
+    
+    mapping(address => RelacaoDeContratantes) public listaContratantes;
+    RelacaoDeContratantes[] public contratantes;
+
+    bool public encerrado;
+    bool public lotado;
+    //bool public reservado;
+    
+    //event zarpou (uint valor);
+                // ^----- tenho dúvida do que colocar aqui. A ideia era gerar
+                // informação de que o navio zarpou. Pensei em vincular com o prazo.
+    
+    modifier somenteContratada {
+        require(msg.sender == contaContratada, "Somente Contratada pode realizar essa operacao");
+        _;
+    }
+
+    constructor(
+        uint _prazoParaContrato, 
+        uint _precoPorContainer) public {
+                                                                                                                        //^----- preciso deste item no constructor?
+        prazoParaContrato = now + _prazoParaContrato;
+        precoPorContainer = _precoPorContainer;
+    
+    }
+
+    function retornaDisponiveis () public view returns (uint) {
+        return 50-contratantes.length;
+    }
+    
+    function pagamento(string memory Nome, address payable enderecoContratante) public payable {
+        require (now <= prazoParaContrato, "Prazo para Contratacao Encerrado");
+        require (contratantes.length < quantidadeContainers, "Containers esgotados.");
+        require (msg.value == precoPorContainer);
+        
+        enderecoContratante = msg.sender;
+        //uint Valor = msg.value;
+        
+    
+        //for (uint i=50; i>contratantes.length; i--) {
+        //Contratantes memory contratantes = containersdisponiveis[i];
+            
+        
+    
+    //function registraContratante (string memory paramNome, address paramEnderecoContratante) public {
+        
+        RelacaoDeContratantes memory novoContratante = RelacaoDeContratantes(Nome, enderecoContratante);
+        contratantes.push(novoContratante);
+        listaContratantes[novoContratante.enderecoContratante] = novoContratante;
+    
+        
+    }
+
+   
+    function InterrompeContratacoes() public somenteContratada {
+        require(now >= prazoParaContrato, "Prazo Aberto para Contratacao");
+        require(!encerrado, "Prazo para Contratacao Encerrado");
+        encerrado = true;
+
+        contaContratada.transfer(address(this).balance);
+    }
+}
