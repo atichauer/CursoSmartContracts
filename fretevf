@@ -49,7 +49,7 @@ contract frete {
     function pagamento(string memory Nome, address payable enderecoContratante) public payable {
         require (now <= prazoParaContrato, "Prazo para Contratacao Encerrado");
         require (contratantes.length < quantidadeContainers, "Containers esgotados.");
-        require (msg.value == precoPorContainer);
+        require (msg.value == precoPorContainer, "Valor diverso do preço do container");
         
         enderecoContratante = msg.sender;
         //uint Valor = msg.value;
