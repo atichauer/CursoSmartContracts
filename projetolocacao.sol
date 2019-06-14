@@ -2,15 +2,9 @@ pragma solidity 0.5.9;
 
 contract Aluguel {
     
-    string            public                       locatario;
+    string public locatario;
     string public locadores;
     uint256 private valor;
-    uint256 constant numeroMaximoLegalDeAlgueisParaMulta = 3;
-    
-    locatarios[] public partelocataria;
-    locadores[] public partelocadora;
-    fiadores[] public partefiadora; 
-    imovel[] public dadosimovel;
     
     struct locadores {
         string nome;
@@ -39,6 +33,11 @@ contract Aluguel {
         string CRI;
     }
     
+    locatarios[] public partelocataria;
+    locadores[] public partelocadora;
+    fiadores[] public partefiadora; 
+    imovel[] public dadosimovel;
+    
     constructor(string memory nomeLocador, string memory nomeLocatario, uint256 valorDoAluguel) public {
 
         locadores = nomeLocador;
@@ -46,10 +45,24 @@ contract Aluguel {
         valor = valorDoAluguel;
     
     }
- 
-    function valorAtualDoAluguel() public view returns (uint256) {
-        return valor;
-    }
+    
+    function registraLocador
+    
+    function registraLocatario
+    
+    function registraFiador
+    
+    function registraImobiliaria
+    
+    function pagamentoAluguel
+    
+    function divideHonorarios
+    
+    function renovaAluguel
+    
+    function calculaMulta
+    
+    
     
     function simulaMulta( uint256 mesesRestantes, uint256 totalMesesContato) 
     public view returns(uint256 valorMulta) 
