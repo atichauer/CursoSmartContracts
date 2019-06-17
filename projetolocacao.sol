@@ -2,7 +2,7 @@ pragma solidity 0.5.9;
 
 contract Aluguel {
     
-    address payable = taRegistrador;
+    address payable contaRegistrador;
        
     struct imovel {
         string locador;
@@ -35,6 +35,10 @@ contract Aluguel {
         uint valorLocacao;
         uint prazoLocacao;
      }
+    
+    mapping(address => Contratante) public listaContratantes;
+    Contratante[] public contratantes;
+    
     
     constructor(string memory nomeLocador, string memory nomeLocatario, uint256 valorDoAluguel) public {
 
