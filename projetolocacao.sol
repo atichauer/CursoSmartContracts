@@ -2,41 +2,39 @@ pragma solidity 0.5.9;
 
 contract Aluguel {
     
-    string public locatario;
-    string public locadores;
-    uint256 private valor;
-    
-    struct locadores {
-        string nome;
-        string endereco;
-        uint rg;
-        uint cpf;
-    }
-    
-    struct locatarios {
-        string nome;
-        string endereco;
-        uint rg;
-        uint cpf;
-    }
-    
-    struct fiadores {
-        string nome;
-        string endereco;
-        uint rg;
-        uint cpf;
-    }
-    
+    address payable = taRegistrador;
+       
     struct imovel {
-        string endereco;
-        uint matricula;
-        string CRI;
-    }
-    
-    locatarios[] public partelocataria;
-    locadores[] public partelocadora;
-    fiadores[] public partefiadora; 
-    imovel[] public dadosimovel;
+        string locador;
+        uint rgLocador;
+        string endLocador;
+        bytes32 digidLocador;
+        addresspayable contaLodador;
+        
+        string intermediario;
+        uint cnpjIntermediario;
+        string endIntermediario;
+        bytes32 digidIntermediario;
+        addresspayable contaIntermediario;
+        
+        string locatario;
+        uint rgLocatario;
+        uint cpfLocatario;
+        bytes32 digidLocatario;
+                
+        string fiador;
+        uint rgFiador;
+        uint cpfFiador; 
+        dytes32 digidFiador;
+        
+        string enderecoImovel;
+        uint numeroImovel
+        uint complementoImovel;
+        uint CEPImovel;
+        
+        uint valorLocacao;
+        uint prazoLocacao;
+     }
     
     constructor(string memory nomeLocador, string memory nomeLocatario, uint256 valorDoAluguel) public {
 
