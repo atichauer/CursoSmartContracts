@@ -18,10 +18,6 @@ contract Aluguel {
         bytes32 digidLocador;
         address payable contaLocador;
         
-        string intermediario;
-        uint cnpjIntermediario;
-        address payable contaIntermediario;
-        
         string locatario;
         uint rgLocatario;
         uint cpfLocatario;
@@ -52,7 +48,7 @@ contract Aluguel {
     }
 
     function criarContrato(string memory locador, uint rgLocador, string memory endLocador, bytes32 digidLocador, 
-        address payable contaLocador, string memory intermediario, uint cnpjIntermediario, address payable contaIntermediario, string memory enderecoImovel, uint numeroImovel,
+        address payable contaLocador, string memory enderecoImovel, uint numeroImovel,
         uint complementoImovel, uint CEPImovel, uint valorLocacao, uint prazoLocacao) public returns(uint index) {
         //require (!isUser(locador), "user exists");
         DadosDoContrato[locador].locador =  locador;
@@ -60,16 +56,13 @@ contract Aluguel {
         DadosDoContrato[locador].endLocador = endLocador;
         DadosDoContrato[locador].digidLocador = digidLocador;
         DadosDoContrato[locador].contaLocador = contaLocador;
-        DadosDoContrato[locador].intermediario = intermediario;
-        DadosDoContrato[locador].cnpjIntermediario = cnpjIntermediario;
-        DadosDoContrato[locador].contaIntermediario = contaIntermediario;
         DadosDoContrato[locador].enderecoImovel = enderecoImovel;
         DadosDoContrato[locador].numeroImovel = numeroImovel;
         DadosDoContrato[locador].complementoImovel = complementoImovel;
         DadosDoContrato[locador].CEPImovel = CEPImovel;
         DadosDoContrato[locador].valorLocacao = valorLocacao;
         DadosDoContrato[locador].prazoLocacao = prazoLocacao;
-        DadosDoContrato[locador].index = NumeroDoContrato.push(locador)-1;
+        //DadosDoContrato[locador].index = NumeroDoContrato.push(locador)-1;
         return NumeroDoContrato.length-1;
         
     //function registraImovel(address paramEndereco, string memory paramNomeProprietario, uint paramValorVenal) public {
