@@ -3,19 +3,24 @@ pragma solidity 0.5.9;
 contract Aluguel {
     
     address payable contaRegistrador;
-       
+    bool digidCadastrada;
+    
+    constructor(address payable _contaRegistrador) public {
+    
+        _contaRegistrador = contaRegistrador;
+    
+    }
+    
     struct imovel {
         string locador;
         uint rgLocador;
         string endLocador;
         bytes32 digidLocador;
-        addresspayable contaLodador;
+        address payable contaLocador;
         
         string intermediario;
         uint cnpjIntermediario;
-        string endIntermediario;
-        bytes32 digidIntermediario;
-        addresspayable contaIntermediario;
+        address payable contaIntermediario;
         
         string locatario;
         uint rgLocatario;
@@ -25,64 +30,100 @@ contract Aluguel {
         string fiador;
         uint rgFiador;
         uint cpfFiador; 
-        dytes32 digidFiador;
+        bytes32 digidFiador;
         
         string enderecoImovel;
-        uint numeroImovel
+        uint numeroImovel;
         uint complementoImovel;
         uint CEPImovel;
         
         uint valorLocacao;
         uint prazoLocacao;
+        uint index;
      }
     
-    mapping(address => Contratante) public listaContratantes;
-    Contratante[] public contratantes;
+    mapping(string => imovel) private DadosDoContrato;
+    imovel [] private NumeroDoContrato;
     
-    
-    constructor(string memory nomeLocador, string memory nomeLocatario, uint256 valorDoAluguel) public {
+     struct UserStruct {
+        string userEmail;
+        uint userAge;
+        uint index;
+    }
 
-        locadores = nomeLocador;
-        locatario = nomeLocatario;
-        valor = valorDoAluguel;
+    function criarContrato(string memory locador, uint rgLocador, string memory endLocador, bytes32 digidLocador, 
+        address payable contaLocador, string memory intermediario, uint cnpjIntermediario, address payable contaIntermediario, string memory enderecoImovel, uint numeroImovel,
+        uint complementoImovel, uint CEPImovel, uint valorLocacao, uint prazoLocacao) public returns(uint index) {
+        //require (!isUser(locador), "user exists");
+        DadosDoContrato[locador].locador =  locador;
+        DadosDoContrato[locador].rgLocador = rgLocador;
+        DadosDoContrato[locador].endLocador = endLocador;
+        DadosDoContrato[locador].digidLocador = digidLocador;
+        DadosDoContrato[locador].contaLocador = contaLocador;
+        DadosDoContrato[locador].intermediario = intermediario;
+        DadosDoContrato[locador].cnpjIntermediario = cnpjIntermediario;
+        DadosDoContrato[locador].contaIntermediario = contaIntermediario;
+        DadosDoContrato[locador].enderecoImovel = enderecoImovel;
+        DadosDoContrato[locador].numeroImovel = numeroImovel;
+        DadosDoContrato[locador].complementoImovel = complementoImovel;
+        DadosDoContrato[locador].CEPImovel = CEPImovel;
+        DadosDoContrato[locador].valorLocacao = valorLocacao;
+        DadosDoContrato[locador].prazoLocacao = prazoLocacao;
+        DadosDoContrato[locador].index = NumeroDoContrato.push(locador)-1;
+        return NumeroDoContrato.length-1;
+        
+    //function registraImovel(address paramEndereco, string memory paramNomeProprietario, uint paramValorVenal) public {
+      //  Imovel memory novoImovel = Imovel(paramEndereco, paramNomeProprietario, paramValorVenal);
+        
+        //livro1.push(novoImovel);
+        
+        //livro2[paramEndereco] = novoImovel;
+    //}
     
+    //function devolveNomeProprietario(uint matricula) public view returns (string memory) {
+    //    return livro1[matricula].nomeProprietario;
     }
     
-    function registraLocador
-    
-    function registraLocatario
-    
-    function registraFiador
-    
-    function registraImobiliaria
-    
-    function pagamentoAluguel
-    
-    function divideHonorarios
-    
-    function renovaAluguel
-    
-    function calculaMulta
+    //mapping(address => Contratante) public listaContratantes;
+    //Contratante[] public contratantes;
     
     
     
-    function simulaMulta( uint256 mesesRestantes, uint256 totalMesesContato) 
-    public view returns(uint256 valorMulta) 
-    {
+    //function registraLocador
+    
+    //function registraLocatario
+    
+    //function registraFiador
+    
+    //function registraImobiliaria
+    
+    //function pagamentoAluguel
+    
+    //function divideHonorarios
+    
+    //function renovaAluguel
+    
+    //function calculaMulta
+    
+    
+    
+    //function simulaMulta( uint256 mesesRestantes, uint256 totalMesesContato) 
+    //public view returns(uint256 valorMulta) 
+    //{
 
-        valorMulta = valor*numeroMaximoLegalDeAlgueisParaMulta;
-        valorMulta = valorMulta/totalMesesContato;
-        valorMulta = valorMulta*mesesRestantes;
+        //valorMulta = valor*numeroMaximoLegalDeAlgueisParaMulta;
+        //valorMulta = valorMulta/totalMesesContato;
+        //valorMulta = valorMulta*mesesRestantes;
 
-        return valorMulta;
-    } 
+        //return valorMulta;
+    //} 
     
     
-    function reajustaAluguel(uint256 percentualReajuste) public {
-        uint256 valorDoAcrescimo = 0;
+    //function reajustaAluguel(uint256 percentualReajuste) public {
+      //  uint256 valorDoAcrescimo = 0;
 
-        valorDoAcrescimo = ((valor*percentualReajuste)/100);
-        valor = valor + valorDoAcrescimo;
-    }
+        //valorDoAcrescimo = ((valor*percentualReajuste)/100);
+        //valor = valor + valorDoAcrescimo;
+    //}
     
 }
