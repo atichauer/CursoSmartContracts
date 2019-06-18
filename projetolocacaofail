@@ -1,0 +1,91 @@
+pragma solidity 0.5.9;
+
+contract Aluguel {
+    
+    address payable contaRegistrador;
+    bool digidCadastrada = false;
+    
+    constructor() public {
+    
+        contaRegistrador = msg.sender;
+    
+    }
+    
+    struct imovel {
+        string locador;
+        uint digidLocador;
+        address payable contaLocador;
+        
+        string locatario;
+        uint cpfLocatario;
+        uint digidLocatario;
+                
+       string enderecoImovel;
+        
+        uint valorLocacao;
+        uint prazoLocacao;
+        uint index;
+     }
+    
+    mapping(string => imovel) public DadosDoContrato;
+    imovel[] public NumeroDoContrato;
+    
+    function criarContrato(string memory locador, uint digidLocador, 
+        address payable contaLocador, string memory enderecoImovel, uint valorLocacao, uint prazoLocacao) public returns(uint index) {
+        DadosDoContrato[locador].locador =  locador;
+        DadosDoContrato[locador].digidLocador = digidLocador;
+        DadosDoContrato[locador].contaLocador = contaLocador;
+        DadosDoContrato[locador].enderecoImovel = enderecoImovel;
+        DadosDoContrato[locador].valorLocacao = valorLocacao;
+        DadosDoContrato[locador].prazoLocacao = prazoLocacao;
+        //DadosDoContrato[locador].index = NumeroDoContrato.push(locador)-1;
+        return NumeroDoContrato.length-1;
+    }    
+    
+    //function registraImovel(address paramEndereco, string memory paramNomeProprietario, uint paramValorVenal) public {
+    //    Imovel memory novoImovel = Imovel(paramEndereco, paramNomeProprietario, paramValorVenal);
+    //    livro1.push(novoImovel);
+    //    livro2[paramEndereco] = novoImovel;
+    //}
+    
+    function registraLocatario(string memory Locador, ) public returns(bool success) {
+        require (isUser(userAddress), "user not exists");
+        userStructs[userAddress].userEmail = userEmail;
+        return true;
+    }
+
+    function updateUserAge(string locatario, uint cpfLocatario, uint digidLocatario;) public returns(bool success) {
+        require ()
+        DadosDoContrato[locador].locatario =  locatario;
+        DadosDoContrato[locador].cpfLocatario = cpfLocatario;
+        DadosDoContrato[locador].digidLocatario = digiLocatario;
+        DadosDoContrato[userAddress].userAge = userAge;
+        return true;
+    } 
+    
+    //function informaNumeroContrato(string memory locador) public view returns (uint) {
+    //    return (NumeroDoContrato[locador].index);
+    //}
+    
+    
+    //function devolveNomeProprietario(uint matricula) public view returns (string memory) {
+    //    return livro1[matricula].nomeProprietario;
+    //}
+    
+    //function registraLocador
+    
+    //function registraLocatario
+    
+    //function registraFiador
+    
+    //function registraImobiliaria
+    
+    //function pagamentoAluguel
+    
+    //function divideHonorarios
+    
+    //function renovaAluguel
+    
+    //function calculaMulta
+  
+}
