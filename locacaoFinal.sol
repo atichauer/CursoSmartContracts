@@ -49,7 +49,7 @@ contract Aluguel {
     }
     Contrato[] public ListaDeContratos;
     
-    function criarContrato 
+    function a_criarContrato 
         (string memory paramlocador, uint paramDigidLocador, address payable paramContaLocador, string memory paramEnderecoImovel, uint paramValorLocacao, uint paramvalorGarantia, uint paramDataInicialLocacao, uint paramDataFinalLocacao) 
         public 
         returns (uint) 
@@ -59,7 +59,7 @@ contract Aluguel {
         return ListaDeContratos.length-1;
     }
     
-    function registraLocatario(uint numeroDoContrato, address payable paramcontaLocatario, string memory paramLocatario, uint paramdigidLocatario) public {
+    function b_registraLocatario(uint numeroDoContrato, address payable paramcontaLocatario, string memory paramLocatario, uint paramdigidLocatario) public {
         Contrato storage contratoLocacao = ListaDeContratos[numeroDoContrato];
         contratoLocacao.locatario = paramLocatario;
         contratoLocacao.contaLocatario = paramcontaLocatario;
@@ -72,7 +72,7 @@ contract Aluguel {
         return (contratoLocacao.locador, contratoLocacao.digidLocador, contratoLocacao.locatario, contratoLocacao.digidLocatario, contratoLocacao.enderecoImovel, contratoLocacao.valorLocacao, contratoLocacao.valorLocacao, contratoLocacao.dataInicialLocacao, contratoLocacao.dataFinalLocacao);
     } 
     
-    function depositaGarantia (uint numeroDoContrato) public payable {
+    function c_depositaGarantia (uint numeroDoContrato) public payable {
         Contrato memory contratoLocacao = ListaDeContratos[numeroDoContrato];
         require (msg.value == contratoLocacao.valorGarantia, "Garantia diversa da exigida");
         require (now <= contratoLocacao.dataInicialLocacao, "Imovel não disponível");
@@ -82,11 +82,12 @@ contract Aluguel {
         emit contratoGarantido(numeroDoContrato);
     }
     
-    function pagamento (uint numeroDoContrato) public payable {
+    function d_pagamento (uint numeroDoContrato) public payable {
         Contrato memory contratoLocacao = ListaDeContratos[numeroDoContrato];
         require (garantiaDepositada, "Efetuar o depósito da garantia");
         require (msg.value == contratoLocacao.valorLocacao, "Valor diverso do estipulado pelo Locador");
         require (now <= contratoLocacao.dataInicialLocacao, "Imovel não disponível");
+        require (!pagamentosEfetuados, "Pagamento já realizado");
         emit contratoPago(msg.value); numeroDoContrato;
         valorComissaoRegistrador = (10*address(this).balance)/100;
         contaRegistrador.transfer(valorComissaoRegistrador);
@@ -95,7 +96,7 @@ contract Aluguel {
         
     }
     
-    function estornaGarantia (uint numeroDoContrato) public {
+    function e_estornaGarantia (uint numeroDoContrato) public {
         Contrato memory contratoLocacao = ListaDeContratos [numeroDoContrato];
         require (msg.sender == contratoLocacao.contaLocador, "Usuário não autorizado a realizar esta operação");
         contratoLocacao.contaLocatario.transfer(contratoLocacao.valorGarantia);
