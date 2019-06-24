@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Página inicial Contrato por Temporada</title>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align:center;">Contrato de Locação por temporada</h1>
+        <br>
+        <h3 style="text-align:center;">Esta é uma interface com um "Smart Contract" onde todas as informações aqui lançadas ficarão devidamente registradas em Blockchain para sua segurança e confiabilidade da transação</h3>
+        <br>
+        <h5>Condições: 1.1 Ao criar um Anúncio através desta plataforma você deve (i) fornecer informações completas e precisas sobre seu imóvel. Você é responsável por manter as informações do seu Anúncio atualizadas a todo o momento (incluindo a disponibilidade de calendário).
+            1.2 Você é o único responsável por estabelecer um preço (incluindo quaisquer Impostos, se aplicável, ou cobranças como uma taxas de limpeza) para seu Anúncio (“Valor pelo Período”). 
+            1.3 Quando você aceita ou quando tiver pré-aprovado uma solicitação de reserva por um locatário, você celebra um contrato legalmente vinculante com ele, e você deve disponibilizar seu imóvel conforme descrito em seu Anúncio quando a solicitação de reserva for feita. Você também concorda em pagar a(s) Taxa(s) aplicável(is) e eventuais Impostos aplicáveis.
+        </h5>
+            <br>
+            <h2 style="text-align:center;">Locador: Cadastre seu imóvel</h2>
+            <h4 style="text-align: center;">*Uso exclusivo do locador*</h4>
+            <br>
+            <div id="proprietario">
+                
+                <form class="form-horizontal" action="#" method="get" name="formcriarContrato" id="formcriarContrato" >
+                    
+                    <div class="form-group">
+                    <label class="control-label col-sm-2" for="locador">Nome</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" name="locador" id="locador" placeholder="Nome do Locador">
+                    </div>
+                    </div>
+                    
+                    <div class="form-group">
+                    <label class="control-label col-sm-2" for="digidLocador">ID Digital</label>
+                    <div class="col-sm-10"> 
+                    <input type="number" class="form-control" name="digidLocador" id="digidLocador" placeholder="Insira sua ID Digital">
+                    </div>
+                    </div>
+                    
+                        <div>
+                        <button class="btn-link" onclick="window.open('https://gabrilli.github.io/digitalid/index.html')">
+                        <span class="glyphicon glyphicon-edit"></span>&nbsp;Não tem ID Digital? Clique aqui</button>
+                        </div>
+                        <br>
+                    
+                    <div class="form-group">
+                    <label class="control-label col-sm-2" for="contaLocador">Conta Ethereum</label>
+                    <div class="col-sm-10"> 
+                    <input type="number" class="form-control" name="contaLocador" id="contaLocador" placeholder="Insira sua conta no Ethereum">
+                    </div>
+                    </div>
+                    
+                        <br>
+                        <div>
+                        <button class="btn-link" onclick="window.open('https://metamask.io/')">
+                        <span class="glyphicon glyphicon-edit"></span>&nbsp;Não tem uma carteira no Ethereum? Clique aqui</button>
+                        </div>
+                    
+                    <br>
+                    <div class="form-group">
+                    <label class="control-label col-sm-2" for="enderecoImovel">Endereço do Imóvel</label>
+                    <div class="col-sm-10"> 
+                    <input type="text" class="form-control" name="enderecoImovel" id="enderecoImovel" placeholder="Insira o endereço do imóvel">
+                    </div>
+                    
+                    </div>
+                    <div class="form-group">
+                    <label class="control-label col-sm-2" for="valorLocacao">Valor pelo período</label>
+                    <div class="col-sm-10"> 
+                    <input type="number" class="form-control" name="valorLocacao" id="valorLocacao" placeholder="Insira o valor da locação pelo período">
+                    </div>
+                    </div>
+                    
+                    <div class="form-group">
+                    <label class="control-label col-sm-2" for="valorGarantia">Valor da garantia</label>
+                    <div class="col-sm-10"> 
+                    <input type="number" class="form-control" name="valorGarantia" id="valorGarantia" placeholder="Insira o valor da garantia exigida">
+                    </div>
+                    </div>
+                    
+                    <div class="form-group">
+                    <label class="control-label col-sm-2" for="dataInicialLocacao">Data inicial</label>
+                    <div class="col-sm-10"> 
+                    <input type="number" class="form-control" name="dataInicialLocacao" id="dataInicialLocacao" placeholder="Data inicial da locação">
+                    </div>
+                    </div>
+                    
+                    <div class="form-group">
+                    <label class="control-label col-sm-2" for="dataFinalLocacao">Data final da locação</label>
+                    <div class="col-sm-10"> 
+                    <input type="number" class="form-control" name="dataFinalLocacao" id="dataFinalLocacao" placeholder="Data final da locação">
+                    </div>
+                    </div>
+                    
+                    <div>
+                    <button type="submit" class="btn btn-primary btn-block" onclick="Registrar criarContrato()">
+                    <span class="glyphicon glyphicon-search"></span>&nbsp;Cadastrar Imóvel</button>
+                    </div>
+                </form>
+
+                <br>
+                <h2 style="text-align:center;">Locatário: Registre seus dados </h2>
+                <h4 style="text-align: center">*Uso exclusivo do locatario*</h4>
+                <br>
+                <div id="locatario">
+                    
+                    <form class="form-horizontal" action="#" method="get" name="formRegistraLocatario" id="formRegistraLocatario" >
+                        
+                        <div class="form-group">
+                        <label class="control-label col-sm-2" for="numeroDoContrato">Numero do Contrato</label>
+                        <div class="col-sm-10">
+                        <input type="number" class="form-control" name="numeroDoContrato" id="numeroDoContrato" placeholder="Insira o número do Contrato">
+                        </div>
+                        </div>
+                        
+                        <div class="form-group">
+                        <label class="control-label col-sm-2" for="locatario">Nome</label>
+                        <div class="col-sm-10"> 
+                        <input type="text" class="form-control" name="Locatario" id="Locatario" placeholder="Insira seu nome">
+                        </div>
+                        </div>
+                        
+                        <div class="form-group">
+                        <label class="control-label col-sm-2" for="digidLocatario">ID Digital</label>
+                        <div class="col-sm-10"> 
+                        <input type="number" class="form-control" name="digidLocatario" id="digidLocatario" placeholder="Insira sua ID Digital">
+                        </div>
+                        </div>
+
+                            <div>
+                            <button class="btn-link" onclick="window.open('https://gabrilli.github.io/digitalid/index.html')">
+                            <span class="glyphicon glyphicon-edit"></span>&nbsp;Não tem ID Digital? Clique aqui</button>
+                            </div>
+                            <br>
+                        
+                        <div class="form-group">
+                        <label class="control-label col-sm-2" for="contaLocatario">Conta Ethereum</label>
+                        <div class="col-sm-10"> 
+                        <input type="number" class="form-control" name="contaLocatario" id="contaLocatario" placeholder="Insira sua conta no Ethereum">
+                        </div>
+                        </div>
+                        
+                            <br>
+                            <div>
+                            <button class="btn-link" onclick="window.open('https://metamask.io/')">
+                            <span class="glyphicon glyphicon-edit"></span>&nbsp;Não tem uma carteira no Ethereum? Clique aqui</button>
+                            </div>
+                            </div>
+                        <br>                       
+                        <div>
+                        <button type="submit" class="btn btn-warning btn-block" onclick="Registrar registraLocatario()">
+                        <span class="glyphicon glyphicon-search"></span>&nbsp;Registrar Locatário</button>
+                        </div>
+                      
+                    </form>
+            
+                    <br>
+                    <h2>Buscar Contrato</h2>
+                    <h4>*Busque aqui os dados para contratar a locação que lhe interessou*</h4>
+                    <div id="buscarContrato">
+                        <form class="form-horizontal" action="#" method="get" name="formBuscarContrato" id="formBuscarContrato">
+                            <br>
+                            <div>
+                                <div class="form-group">
+                                <label class="control-label col-sm-2" for="Numero do Contrato">Número do contrato </label>
+                                <div class="col-sm-10"> 
+                                <input type="number" class="form-control inputdefault" name="numeroDoContrato" id="numeroDoContrato" placeholder="Informe o número do contrato"/>
+                            <br>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary btn-block" onclick="buscaContratoPorNumero()">
+                                <span class="glyphicon glyphicon-search"></span>&nbsp;Pesquisar</button>
+                            </div>
+                        </form>
+                    <div id="resultadoPesquisa"></div>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>        
+            
+                    <br>
+                    <h2>Depositar a garantia da Locação</h2>
+                    <h4>*Uso exclusivo do locatário*</h4>
+                    <div id="depositaGarantia">
+                        <form class="form-horizontal" action="#" method="get" name="formDepositaGarantia" id="formDepositaGarantia">
+                            <br>
+                            <div>
+                                <div class="form-group">
+                                <label class="control-label col-sm-2" for="Numero do Contrato">Número do contrato </label>
+                                <div class="col-sm-10"> 
+                                <input type="number" class="form-control inputdefault" name="numeroDoContrato" id="numeroDoContrato" placeholder="Infomre o número do contrato"/>
+                            <br>
+                            </div>
+                            </div>
+                            
+                            <div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="Valor">Garantia</label>
+                                    <div class="col-sm-10"> 
+                                    <input type="number" class="form-control inputdefault" name="valorGarantia" id="valorGarantia" placeholder="Preencha com o valor da Garantia estipulada pelo Locador"/>
+                            <br>
+                            </div>
+                            </div>
+                            
+                            <div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="Conta Ethereum">Conta Ethereum</label>
+                                    <div class="col-sm-10"> 
+                                    <input type="number" class="form-control inputdefault" name="contaLocatario" id="contaLocatario" placeholder="Informe sua conta do Ethereum" />
+                            <br>
+                            </div>
+                            
+                            <div>
+                                <button class="btn btn-primary btn-block" onclick="depositaGarantia()">
+                                <span class="glyphicon glyphicon-usd"></span>&nbsp;Depositar garantia</button>
+                            </div>
+                        </form>
+                    <div id="resultadoPesquisa"></div>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>        
+                    <br>
+                    <h2>Pagar Locação</h2>
+                    <h4>*Uso exclusivo do locatário*</h4>
+                    <div id="pagamento">
+                        <form class="form-horizontal" action="#" method="get" name="formpagamento" id="formPagamento">
+                            <br>
+                            <div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="Numero do Contrato"> Número do contrato </label>
+                                    <div class="col-sm-10"> 
+                                    <input type="number" class="form-control inputdefault" name="numeroDoContrato" id="numeroDoContrato" placeholder="Informe o número do contrato" />
+                            <br>
+                            </div>
+                            
+                            <div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="Valor">Valor da Locação</label>
+                                    <div class="col-sm-10"> 
+                                    <input type="number" class="form-control inputdefault" name="valorLocacao" id="valorLocacao" placeholder="Preencha com o valor da Locação"/>
+                            <br>
+                            </div>
+                            </div>
+                            
+                            <div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="Conta Ethereum">Conta Ethereum</label>
+                                    <div class="col-sm-10"> 
+                                    <input type="number" class="form-control inputdefault" name="contaLocatario" id="contaLocatario" placeholder="Informe sua conta do Ethereum"/>
+                            <br>
+                            </div>
+                            
+                                                        
+                            <div>
+                                <button class="btn btn-primary btn-block" onclick="pagamento()">
+                                <span class="glyphicon glyphicon-usd"></span>&nbsp;Pagar</button>
+                            </div>
+                        </form>
+                    <div id="resultadoPesquisa"></div>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>        
+                    <br>
+                    
+                    <br>        
+                    <br>
+                    <h2>Restituir garantia ao locatário</h2>
+                    <h4>*Uso exclusivo do locador*</h4>
+                    <div id="restituir">
+                        <form class="form-horizontal" action="#" method="get" name="forestornarGarantia" id="formEstornarGarantia">
+                            <br>
+                            <div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="Numero do Contrato"> Número do contrato </label>
+                                    <div class="col-sm-10"> 
+                                    <input type="number" class="form-control inputdefault" name="numeroDoContrato" id="numeroDoContrato" placeholder="Informe o número do contrato" />
+                            <br>
+                            </div>
+                                                         
+                            <div>
+                                <button class="btn btn-primary btn-block" onclick="estornaGarantia()">
+                                <span class="glyphicon glyphicon-usd"></span>&nbsp;Restituir</button>
+                            </div>
+                        </form>
+                    <div id="resultadoPesquisa"></div>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>        
+                    <br>
+
+    
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="connectToSmartContract.js"></script>
+    <script src="abi.js"></script>
+    <script>
+        var frmcriarContrato = document.formcriarContrato;
+        function criarContrato() {
+            event.preventDefault();
+            $("#criarContrato").html("");
+            contract.a_criarContrato(frmcriarContrato.locador.value, frmcriarContrato.digidLocador.value, frmcriarContrato.contaLocador.value, 
+            frmcriarContrato.enderecoImovel.value, frmcriarContrato.valorLocacao.value, 
+            frmcriarContrato.valorGarantia.value, frmcriarContrato.dataInicialLocacao.value
+            frmcriarContrato.dataFinalLocacao.value, {from: web3.eth.accounts[0], gas: 3000000, value: 0}, function (erro, resultado) {
+                if (erro) {
+                    console.log("criarContrato");
+                    console.error(erro);
+                    alert("Houve um erro ao criar esse contrato");
+                    return
+                }
+                $("#criarContrato").html("O número do contrato cadastrado é: " + resultado);
+            })
+        }
+        var frmregistraLocatario = document.formregistraLocatario;
+        function registraLocatario() {
+            event.preventDefault();
+            $("#statusTransacao").html("&nbsp;");
+            contract.b_registraLocatario(frmregistraLocatario.numeroDoContrato.value, frmregistraLocatario.contaLocatario.value, 
+            frmregistraLocatario.locatario.value, 
+            frmregistraLocatario.digidLocatario, {from: web3.eth.accounts[0], gas: 3000000, value: 0}, function (erro, resultado) {
+                if (erro) {
+                    console.log("registrarLocatario");
+                    console.error(erro);
+                    alert("ERRO - Registro não realizado" );
+                    return
+                }
+                waitForTxToBeMined(resultado, "#statusTransacao");
+            })
+        }
+
+        var frmregistraLocatario = document.formregistraLocatario;
+        function registraLocatario() {
+            event.preventDefault();
+            $("#statusTransacao").html("&nbsp;");
+            contract.b_registraLocatario(frmregistraLocatario.numeroDoContrato.value, frmregistraLocatario.contaLocatario.value, 
+            frmregistraLocatario.locatario.value, 
+            frmregistraLocatario.digidLocatario, {from: web3.eth.accounts[0], gas: 3000000, value: 0}, function (erro, resultado) {
+                if (erro) {
+                    console.log("registrarLocatario");
+                    console.error(erro);
+                    alert("ERRO - Registro não realizado" );
+                    return
+                }
+                waitForTxToBeMined(resultado, "#statusTransacao");
+            })
+        }
+
+        var frmregistraLocatario = document.formregistraLocatario;
+        function registraLocatario() {
+            event.preventDefault();
+            $("#statusTransacao").html("&nbsp;");
+            contract.b_registraLocatario(frmregistraLocatario.numeroDoContrato.value, frmregistraLocatario.contaLocatario.value, 
+            frmregistraLocatario.locatario.value, 
+            frmregistraLocatario.digidLocatario, {from: web3.eth.accounts[0], gas: 3000000, value: 0}, function (erro, resultado) {
+                if (erro) {
+                    console.log("registrarLocatario");
+                    console.error(erro);
+                    alert("ERRO - Registro não realizado" );
+                    return
+                }
+                waitForTxToBeMined(resultado, "#statusTransacao");
+            })
+        }
+    </script>
+</body>
+</html>
