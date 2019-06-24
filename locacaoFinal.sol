@@ -50,16 +50,20 @@ contract Aluguel {
     Contrato[] public ListaDeContratos;
     
     function a_criarContrato 
-        (string memory paramlocador, uint paramDigidLocador, address payable paramContaLocador, string memory paramEnderecoImovel, uint paramValorLocacao, uint paramvalorGarantia, uint paramDataInicialLocacao, uint paramDataFinalLocacao) 
+        (string memory paramlocador, uint paramDigidLocador, address payable paramContaLocador, 
+        string memory paramEnderecoImovel, uint paramValorLocacao, uint paramvalorGarantia, 
+        uint paramDataInicialLocacao, uint paramDataFinalLocacao) 
         public 
         returns (uint) 
     {
-        Contrato memory novoContrato = Contrato (paramlocador, paramDigidLocador, paramContaLocador, " ", 0, address(0), paramEnderecoImovel, paramValorLocacao, paramvalorGarantia, paramDataInicialLocacao, paramDataFinalLocacao);
+        Contrato memory novoContrato = Contrato (paramlocador, paramDigidLocador, paramContaLocador, " ", 0, address(0), 
+        paramEnderecoImovel, paramValorLocacao, paramvalorGarantia, paramDataInicialLocacao, paramDataFinalLocacao);
         ListaDeContratos.push(novoContrato);
         return ListaDeContratos.length-1;
     }
     
-    function b_registraLocatario(uint numeroDoContrato, address payable paramcontaLocatario, string memory paramLocatario, uint paramdigidLocatario) public {
+    function b_registraLocatario(uint numeroDoContrato, address payable paramcontaLocatario, string memory paramLocatario, 
+    uint paramdigidLocatario) public {
         Contrato storage contratoLocacao = ListaDeContratos[numeroDoContrato];
         contratoLocacao.locatario = paramLocatario;
         contratoLocacao.contaLocatario = paramcontaLocatario;
